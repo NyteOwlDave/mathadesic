@@ -1,10 +1,3 @@
-
-REM https://www.facebook.com
-REM photo 
-REM ?fbid=10233219538484953 
-REM &set=pcb.3972550659723000
-REM ---------------------------
-
 10 COLOR 0 : REM SFONDO NERO
 20 COLOR 4,7 : REM BORDO BLU
 30 COLOR 1,16 : REM PRIMO PIANO 1 GRIGIO
@@ -26,3 +19,10 @@ REM ---------------------------
 190     DRAW 2,X1,171-Y1 TO X1,190
 200   NEXT XI
 210 NEXT ZI
+
+REM https://www.facebook.com
+REM photo 
+REM ?fbid=10233219538484953 
+REM &set=pcb.3972550659723000
+REM ---------------------------
+
