@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<!-- 
+https://claude.ai/chat/f1c7478b-2ad0-41f4-a080-040ef391dc72
+https://claude.ai/public/artifacts/88af2529-132f-4e69-8fcb-524abbef3811
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="generator" content="claude">
+    <meta name="chat-url" content="https://claude.ai/chat/f1c7478b-2ad0-41f4-a080-040ef391dc72">
+    <meta name="artifact-url" content="https://claude.ai/public/artifacts/88af2529-132f-4e69-8fcb-524abbef3811">
+    <meta name="aikey" content="f1c7478b-2ad0-41f4-a080-040ef391dc72">
+    <meta name="tikey" content="f1c7478b-2ad0-41f4-a080-040ef391dc72">
+    <meta name="artifact-key" content="88af2529-132f-4e69-8fcb-524abbef3811">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Field Lines Galaxy</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+        
+        canvas {
+            border: 1px solid #333;
+            background: #000;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+        
+        .controls {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+            max-width: 1280px;
+        }
+        
+        .parameter-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            min-width: 120px;
+        }
+        
+        .parameter-group label {
+            font-size: 12px;
+            color: #ccc;
+        }
+        
+        .parameter-group input {
+            width: 100px;
+            background: #333;
+            border: 1px solid #555;
+            border-radius: 3px;
+            color: white;
+            height: 20px;
+        }
+        
+        .parameter-group .value {
+            font-size: 11px;
+            color: #aaa;
+            font-family: monospace;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-left: 20px;
+        }
+        
+        button {
+            padding: 8px 16px;
+            background: #2a5caa;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #3a6cba;
+        }
+        
+        .title {
+            margin-bottom: 10px;
+            font-size: 24px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">Field Lines Galaxy</div>
+    <canvas id="canvas" width="1280" height="960"></canvas>
+    <div class="controls">
+        <div class="parameter-group">
+            <label>Field Size (np)</label>
+            <input type="range" id="npSlider" min="400" max="1200" value="800" oninput="updateParameter('np')">
+            <div class="value" id="npValue">800</div>
+        </div>
+        
+        <div class="parameter-group">
+            <label>Lines Count (n)</label>
+            <input type="range" id="nSlider" min="50" max="500" value="180" oninput="updateParameter('n')">
+            <div class="value" id="nValue">180</div>
+        </div>
+        
+        <div class="parameter-group">
+            <label>Segments (m)</label>
+            <input type="range" id="mSlider" min="10" max="100" value="30" oninput="updateParameter('m')">
+            <div class="value" id="mValue">30</div>
+        </div>
+        
+        <div class="parameter-group">
+            <label>Step Size (k)</label>
+            <input type="range" id="kSlider" min="0.005" max="0.1" step="0.005" value="0.02" oninput="updateParameter('k')">
+            <div class="value" id="kValue">0.020</div>
+        </div>
+        
+        <div class="buttons">
+            <button onclick="regenerate()">Generate New Galaxy</button>
+            <button onclick="clearCanvas()">Clear</button>
+            <button onclick="resetDefaults()">Reset Defaults</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const PI = Math.PI;
+        
+        // Adjustable parameters
+        let NP = 800;
+        let N = 180;
+        let M = 30;
+        let K = 0.02;
+        
+        function updateParameter(param) {
+            const slider = document.getElementById(param + 'Slider');
+            const valueDisplay = document.getElementById(param + 'Value');
+            
+            switch(param) {
+                case 'np':
+                    NP = parseInt(slider.value);
+                    valueDisplay.textContent = NP;
+                    break;
+                case 'n':
+                    N = parseInt(slider.value);
+                    valueDisplay.textContent = N;
+                    break;
+                case 'm':
+                    M = parseInt(slider.value);
+                    valueDisplay.textContent = M;
+                    break;
+                case 'k':
+                    K = parseFloat(slider.value);
+                    valueDisplay.textContent = K.toFixed(3);
+                    break;
+            }
+            
+            // Auto-regenerate when parameters change
+            drawFieldLines();
+        }
+        
+        function resetDefaults() {
+            NP = 800;
+            N = 180;
+            M = 30;
+            K = 0.02;
+            
+            document.getElementById('npSlider').value = NP;
+            document.getElementById('nSlider').value = N;
+            document.getElementById('mSlider').value = M;
+            document.getElementById('kSlider').value = K;
+            
+            document.getElementById('npValue').textContent = NP;
+            document.getElementById('nValue').textContent = N;
+            document.getElementById('mValue').textContent = M;
+            document.getElementById('kValue').textContent = K.toFixed(3);
+            
+            drawFieldLines();
+        }
+        
+        function clearCanvas() {
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+        
+        function sgn(value) {
+            return value > 0 ? 1 : value < 0 ? -1 : 0;
+        }
+        
+        function drawFieldLines() {
+            clearCanvas();
+            
+            for (let i = 0; i < N; i++) {
+                let x = Math.random();
+                let y = Math.random();
+                
+                let prevX, prevY;
+                
+                for (let j = 0; j < M; j++) {
+                    const x_pixel = Math.floor(NP * x);
+                    const y_pixel = Math.floor(NP * y);
+                    
+                    const screenX = x_pixel + (1280 - NP) / 2;
+                    const screenY = y_pixel;
+                    
+                    if (j > 0) {
+                        // Color calculation based on position
+                        const color2 = prevX * prevX + prevY * prevY;
+                        const rr = Math.floor(4 * (color2 % 256));
+                        const gg = Math.floor(color2 % 256);
+                        const bb = Math.floor((255 - Math.floor(color2 / 2)) % 256);
+                        
+                        // Draw line from previous point to current point
+                        ctx.strokeStyle = `rgb(${rr}, ${gg}, ${bb})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(prevX, prevY);
+                        ctx.lineTo(screenX, screenY);
+                        ctx.stroke();
+                    }
+                    
+                    prevX = screenX;
+                    prevY = screenY;
+                    
+                    // Calculate field direction
+                    const xx = 2 * x - 1;
+                    const yy = 2 * y - 1;
+                    
+                    let an;
+                    if (xx !== 0) {
+                        an = Math.atan(yy / xx);
+                    } else {
+                        an = PI / 2 * sgn(yy);
+                    }
+                    
+                    if (xx < 0) {
+                        an = an + PI * sgn(yy);
+                    }
+                    
+                    // Apply field equation - this creates the swirl pattern
+                    an = an + 4 * PI / 3 + Math.sin(6 * PI * Math.sqrt(xx * xx + yy * yy)) / 4;
+                    
+                    // Update position along field line
+                    x = x + K * Math.cos(an);
+                    y = y + K * Math.sin(an);
+                    
+                    // Break if we go outside the unit square
+                    if (x <= 0 || x >= 1 || y <= 0 || y >= 1) break;
+                }
+            }
+        }
+        
+        function regenerate() {
+            drawFieldLines();
+        }
+        
+        // Initial draw
+        drawFieldLines();
+    </script>
+</body>
+</html>
