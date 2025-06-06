@@ -3,11 +3,11 @@ Const pi = 3.1415926
 
 Randomize Timer
 
-Screen _NewImage(1280, 960, 32)
+Screen _NewImage(160, 120, 32)
 Dim screenW As Integer, screenH As Integer
 
-screenW = 1280
-screenH = 960
+screenW = 160
+screenH = 120
 
 Color 0, 1: Rem SFOMDO HERO
 Color 4, 7: Rem BORDO BLU
@@ -28,6 +28,7 @@ For ZI = -YP To YP
         Y1 = Int(YY - ZI + 90)
         '180 DRAW 1,X1,170-Y1 : REM POINT
         '190 DRAW 2 X1,171-Y1 TO X1,190 : REM LINE
+        Line (X1, 170 - Y1)-(X1, 171 - Y1), 15
         Line (X1, 171 - Y1)-(X1, 190), 15
     Next XI
 Next ZI

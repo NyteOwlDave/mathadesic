@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casio Calculator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .calculator {
+            background: linear-gradient(145deg, #ffffff, #e6e6e6);
+            border-radius: 15px;
+            box-shadow: 
+                20px 20px 40px rgba(0,0,0,0.1),
+                -20px -20px 40px rgba(255,255,255,0.8),
+                inset 2px 2px 5px rgba(0,0,0,0.05);
+            padding: 25px;
+            width: 280px;
+            position: relative;
+        }
+
+        .brand {
+            font-weight: bold;
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .model {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 10px;
+            color: #666;
+        }
+
+        .solar-panel {
+            width: 40px;
+            height: 15px;
+            background: linear-gradient(90deg, #2c1810, #1a0f08);
+            border-radius: 2px;
+            margin: 10px 0;
+        }
+
+        .display-container {
+            background: #2d3748;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0 20px 0;
+            box-shadow: inset 3px 3px 8px rgba(0,0,0,0.3);
+        }
+
+        .memory-indicator {
+            color: #4a5568;
+            font-size: 12px;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        .display {
+            background: #1a202c;
+            color: #ffffff;
+            font-family: 'Courier New', monospace;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: right;
+            padding: 10px;
+            border-radius: 4px;
+            min-height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            border: 1px solid #4a5568;
+            overflow: hidden;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 8px;
+            padding: 12px 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            box-shadow: 
+                3px 3px 6px rgba(0,0,0,0.15),
+                -2px -2px 6px rgba(255,255,255,0.7);
+            min-height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+            box-shadow: 
+                1px 1px 3px rgba(0,0,0,0.2),
+                inset 1px 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .btn-number {
+            background: linear-gradient(145deg, #f7fafc, #e2e8f0);
+            color: #2d3748;
+        }
+
+        .btn-operation {
+            background: linear-gradient(145deg, #ffffff, #f7fafc);
+            color: #4a5568;
+        }
+
+        .btn-memory {
+            background: linear-gradient(145deg, #f7fafc, #e2e8f0);
+            color: #4a5568;
+            font-size: 12px;
+        }
+
+        .btn-clear {
+            background: linear-gradient(145deg, #fed7d7, #fc8181);
+            color: #742a2a;
+        }
+
+        .btn-equals {
+            background: linear-gradient(145deg, #c6f6d5, #68d391);
+            color: #22543d;
+        }
+
+        .btn-zero {
+            grid-column: span 2;
+        }
+
+        .error {
+            color: #e53e3e;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="brand">CASIO</div>
+        <div class="model">MX-12B<br>12 DIGITS</div>
+        <div class="solar-panel"></div>
+        
+        <div class="display-container">
+            <div class="memory-indicator">M</div>
+            <div class="display" id="display">0</div>
+        </div>
+
+        <div class="buttons">
+            <!-- Row 1 -->
+            <button class="btn btn-memory" onclick="memoryRecall()">MR</button>
+            <button class="btn btn-memory" onclick="memoryClear()">MC</button>
+            <button class="btn btn-memory" onclick="memorySubtract()">M-</button>
+            <button class="btn btn-memory" onclick="memoryAdd()">M+</button>
+            <button class="btn btn-operation" onclick="percentage()">%</button>
+
+            <!-- Row 2 -->
+            <button class="btn btn-operation" onclick="squareRoot()">√</button>
+            <button class="btn btn-number" onclick="inputNumber('7')">7</button>
+            <button class="btn btn-number" onclick="inputNumber('8')">8</button>
+            <button class="btn btn-number" onclick="inputNumber('9')">9</button>
+            <button class="btn btn-operation" onclick="inputOperation('/')">÷</button>
+
+            <!-- Row 3 -->
+            <button class="btn btn-operation" onclick="changeSign()">+/-</button>
+            <button class="btn btn-number" onclick="inputNumber('4')">4</button>
+            <button class="btn btn-number" onclick="inputNumber('5')">5</button>
+            <button class="btn btn-number" onclick="inputNumber('6')">6</button>
+            <button class="btn btn-operation" onclick="inputOperation('*')">×</button>
+
+            <!-- Row 4 -->
+            <button class="btn btn-clear" onclick="clearAll()">C/AC</button>
+            <button class="btn btn-number" onclick="inputNumber('1')">1</button>
+            <button class="btn btn-number" onclick="inputNumber('2')">2</button>
+            <button class="btn btn-number" onclick="inputNumber('3')">3</button>
+            <button class="btn btn-operation" onclick="inputOperation('-')">-</button>
+
+            <!-- Row 5 -->
+            <button class="btn btn-number btn-zero" onclick="inputNumber('0')">0</button>
+            <button class="btn btn-number" onclick="inputNumber('00')">00</button>
+            <button class="btn btn-number" onclick="inputDecimal()">.</button>
+            <button class="btn btn-equals" onclick="calculate()">=</button>
+            <button class="btn btn-operation" onclick="inputOperation('+')">+</button>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+        let currentInput = '0';
+        let previousInput = null;
+        let operator = null;
+        let waitingForNewInput = false;
+        let memory = 0;
+
+        function updateDisplay() {
+            // Limit display to 12 digits
+            let displayValue = currentInput;
+            if (displayValue.length > 12) {
+                if (displayValue.includes('.')) {
+                    displayValue = parseFloat(currentInput).toPrecision(8);
+                } else {
+                    displayValue = parseFloat(currentInput).toExponential(5);
+                }
+            }
+            display.textContent = displayValue;
+            
+            // Update memory indicator
+            const memoryIndicator = document.querySelector('.memory-indicator');
+            memoryIndicator.textContent = memory !== 0 ? 'M' : '';
+        }
+
+        function inputNumber(num) {
+            if (waitingForNewInput) {
+                currentInput = num;
+                waitingForNewInput = false;
+            } else {
+                if (currentInput === '0' && num !== '00') {
+                    currentInput = num;
+                } else if (currentInput.length < 12) {
+                    currentInput += num;
+                }
+            }
+            updateDisplay();
+        }
+
+        function inputDecimal() {
+            if (waitingForNewInput) {
+                currentInput = '0.';
+                waitingForNewInput = false;
+            } else if (!currentInput.includes('.') && currentInput.length < 11) {
+                currentInput += '.';
+            }
+            updateDisplay();
+        }
+
+        function inputOperation(op) {
+            if (previousInput !== null && operator !== null && !waitingForNewInput) {
+                calculate();
+            }
+            
+            previousInput = currentInput;
+            operator = op;
+            waitingForNewInput = true;
+        }
+
+        function calculate() {
+            if (previousInput === null || operator === null) return;
+
+            let prev = parseFloat(previousInput);
+            let current = parseFloat(currentInput);
+            let result;
+
+            try {
+                switch (operator) {
+                    case '+':
+                        result = prev + current;
+                        break;
+                    case '-':
+                        result = prev - current;
+                        break;
+                    case '*':
+                        result = prev * current;
+                        break;
+                    case '/':
+                        if (current === 0) {
+                            throw new Error('Division by zero');
+                        }
+                        result = prev / current;
+                        break;
+                    default:
+                        return;
+                }
+
+                if (!isFinite(result)) {
+                    throw new Error('Invalid result');
+                }
+
+                currentInput = result.toString();
+                previousInput = null;
+                operator = null;
+                waitingForNewInput = true;
+                updateDisplay();
+            } catch (error) {
+                display.textContent = 'Error';
+                display.classList.add('error');
+                setTimeout(() => {
+                    display.classList.remove('error');
+                    clearAll();
+                }, 2000);
+            }
+        }
+
+        function clearAll() {
+            currentInput = '0';
+            previousInput = null;
+            operator = null;
+            waitingForNewInput = false;
+            updateDisplay();
+        }
+
+        function changeSign() {
+            if (currentInput !== '0') {
+                if (currentInput.startsWith('-')) {
+                    currentInput = currentInput.substring(1);
+                } else {
+                    currentInput = '-' + currentInput;
+                }
+                updateDisplay();
+            }
+        }
+
+        function percentage() {
+            currentInput = (parseFloat(currentInput) / 100).toString();
+            waitingForNewInput = true;
+            updateDisplay();
+        }
+
+        function squareRoot() {
+            let num = parseFloat(currentInput);
+            if (num < 0) {
+                display.textContent = 'Error';
+                display.classList.add('error');
+                setTimeout(() => {
+                    display.classList.remove('error');
+                    clearAll();
+                }, 2000);
+                return;
+            }
+            currentInput = Math.sqrt(num).toString();
+            waitingForNewInput = true;
+            updateDisplay();
+        }
+
+        function memoryAdd() {
+            memory += parseFloat(currentInput);
+            updateDisplay();
+        }
+
+        function memorySubtract() {
+            memory -= parseFloat(currentInput);
+            updateDisplay();
+        }
+
+        function memoryClear() {
+            memory = 0;
+            updateDisplay();
+        }
+
+        function memoryRecall() {
+            currentInput = memory.toString();
+            waitingForNewInput = true;
+            updateDisplay();
+        }
+
+        // Keyboard support
+        document.addEventListener('keydown', function(event) {
+            const key = event.key;
+            
+            if (key >= '0' && key <= '9') {
+                inputNumber(key);
+            } else if (key === '.') {
+                inputDecimal();
+            } else if (key === '+') {
+                inputOperation('+');
+            } else if (key === '-') {
+                inputOperation('-');
+            } else if (key === '*') {
+                inputOperation('*');
+            } else if (key === '/') {
+                event.preventDefault();
+                inputOperation('/');
+            } else if (key === 'Enter' || key === '=') {
+                calculate();
+            } else if (key === 'Escape' || key === 'c' || key === 'C') {
+                clearAll();
+            }
+        });
+
+        // Initialize display
+        updateDisplay();
+    </script>
+</body>
+</html>
