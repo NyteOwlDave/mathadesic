@@ -1,10 +1,19 @@
 
+Const pi = 3.1415926
+
+Randomize Timer
+
+Screen _NewImage(1280, 960, 32)
+Dim screenW As Integer, screenH As Integer
+
+screenW = 1280
+screenH = 960
+
 Color 0, 1: Rem SFOMDO HERO
 Color 4, 7: Rem BORDO BLU
 Color 1, 15: Rem PRIMO PIANO 1 GRIGIO
 Color 2, 1: Rem PRIMO PIANO 2 HERO
-Screen 7
-' GRAPHIC 3,1 : REM AMBIEMTE GRAFICO
+
 XP = 90: YP = 45
 XR = 3.14 * 1.5
 XF = XR / XP
