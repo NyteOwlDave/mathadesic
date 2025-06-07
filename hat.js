@@ -278,26 +278,26 @@ Delete       |  46 | Pan Left
 Pageup       |  33 | Unassigned
 PageDown     |  34 | Pan Right
 Print Screen |  44 | System Use
-Scroll Lock  |     | 
-Caps Lock    |     |
-Num Lock     | 133 |
-Web Home     | 172 | 
-Calculator   | 183 |
-Tab          |   9 |
-Backspace    |   8 |
-NumPad /     | 111 |
-NumPad *     | 106 |
-NumPad -     | 109 |
-NumPad +     | 107 |
-NumPad 0     |  48 |
-NumPad 1     |  49 |
-NumPad 2     |  50 |
-NumPad 3     |  51 |
-NumPad 4     |  |
-NumPad 5     |  |
-NumPad 6     |  |
-NumPad 7     |  |
-NumPad 8     |  |
-NumPad 9     |  |
-NumPad .     |  |
+Scroll Lock  |     | Unassigned
+Caps Lock    |     | System Use
+Num Lock     | 133 | System Use
+Web Home     | 172 | System Use
+Calculator   | 183 | System Use
+Tab          |   9 | System Use
+Backspace    |   8 | Unassigned
+NumPad /     | 111 | Unassigned
+NumPad *     | 106 | Unassigned
+NumPad -     | 109 | Unassigned
+NumPad +     | 107 | Unassigned
+NumPad 0     |  48 | Unassigned
+NumPad 1     |  49 | Unassigned
+NumPad 2     |  50 | Unassigned
+NumPad 3     |  51 | Unassigned
+NumPad 4     |  52 | Unassigned
+NumPad 5     |  53 | Unassigned
+NumPad 6     |  54 | Unassigned
+NumPad 7     |  55 | Unassigned
+NumPad 8     |  56 | Unassigned
+NumPad 9     |  57 | Unassigned
+NumPad .     |  58 | Unassigned
 `;
