@@ -22,10 +22,12 @@ Cls , colorBG
 
 Print
 Print "Enter Demo Number (1 - 7)"
-Input n
+Input a
 
-index = Int(n)
-If (index < 1) Or (index > 3) Then End
+index = Int(a)
+If (index < 1) Or (index > 7) Then End
+
+' Cls , colorBG
 
 For i = -h To h
     m = 0
@@ -34,7 +36,8 @@ For i = -h To h
     For j = -v To v
         x = -xmax * i / h - xmax * j / v
         y = ymax * i / h - ymax * j / v
-        If x * x + y * y <= r Then
+        k = x * x + y * y
+        If k <= r Then
             z = he / 2 - j - f(x, y, index)
             If z < n Then
                 c = colorHI
@@ -60,22 +63,23 @@ Function gf (x, y)
 End Function
 
 Function f (x, y, mode)
-    z = x * x + y * y
+    zz = x * x + y * y
     Select Case mode
         Case 1
             f = 10 * Sin(4 * x) * y
         Case 2
-            f = 190 * Cos(z) * Exp(-z / 6)
+            f = 190 * Cos(zz) * Exp(-zz / 6)
         Case 3
             f = (y * y) / (x * x + 0.0005)
         Case 4
             f = 10 * Sin(x * (y + 1)) * y
         Case 5
-            f = 100 - 400 / Exp(z)
+            f = 100 - 400 / Exp(zz)
         Case 6
-            f = 80 * Cos(2 * y) / (z + 0.001) - 100
+            f = 80 * Cos(2 * y) / (zz + 0.001) - 100
         Case Else
             f = gf(x, y)
     End Select
 End Function
+
 
