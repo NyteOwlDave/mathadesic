@@ -278,8 +278,8 @@ Delete       |  46 | Pan Left
 Pageup       |  33 | Unassigned
 PageDown     |  34 | Pan Right
 Print Screen |  44 | System Use
-Scroll Lock  |     | Unassigned
-Caps Lock    |     | System Use
+Scroll Lock  | 145 | Unassigned
+Caps Lock    |  20 | System Use
 Num Lock     | 133 | System Use
 Web Home     | 172 | System Use
 Calculator   | 183 | System Use
