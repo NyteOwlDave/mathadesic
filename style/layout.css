@@ -1,0 +1,30 @@
+
+/* 
+
+    layout.css
+    2025-JUN-05
+
+    Provides layout and positioning features.
+
+    NOTE: Included by `rimrod.css`
+
+*/
+
+@import url( "./embed.css" );
+
+
+aside br {
+    display : inline-block;
+    min-height  : 24px;
+}
+
+pre, aside, blockquote {
+    display : block;
+    width : 80%;
+    margin-left : 8%;
+}
+
+pre {
+    overflow-x : scroll auto;
+}
+

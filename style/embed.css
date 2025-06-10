@@ -1,0 +1,85 @@
+
+/*
+
+    embed.css
+    2024-JUN-05
+
+    Provides special attributes for embedding and
+    page layout (like position and size).
+
+    Provides display types.
+
+    NOTE: Included by `layout.css`
+
+*/
+
+[inline] {
+    display : inline;
+}
+
+[block] {
+    display : block;
+}
+
+[hidden] {
+    display : none;
+
+}
+
+[center] {
+    display : block;
+    text-align: center;
+}
+
+[slab] {
+    position : fixed;
+    left : 0;
+    width : 100%;
+    margin-left  : 0;
+    margin-right : 0;
+}
+
+[slice] {
+    position : fixed;
+    top : 0;
+    height : 100%;
+    margin-top  : 0;
+    margin-bottom : 0;
+}
+
+[embed] {
+    display : block;
+    margin  : 0;
+    border  : 0;
+    width   : 100%;
+}
+
+[fill] {
+    top     : 0;
+    left    : 0;
+    width   : 100%;
+    height  : 100%;
+}
+
+[slice-half] {
+    width : 50vh;
+}
+
+[slab-half] {
+    height : 50vh;
+}
+
+[spacer] {
+    margin-bottom : 42vh;
+}
+
+[sun] {
+    margin-top : 64px;
+}
+
+[moon] {
+    margin-bottom : 64px;
+}
+
+
+

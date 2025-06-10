@@ -1,0 +1,50 @@
+
+[center] {
+    text-align : center;
+}
+
+html, body {
+    color : rgb( 2, 2, 22 );
+    background : rgb( 242, 242, 142 );
+}
+
+body {
+    text-align: center;
+}
+
+canvas, img {
+    margin-top : 20px;
+    border : 10px solid black;
+    cursor : pointer;
+}
+
+header, footer, main {
+    margin   : 0;
+    position : fixed;
+    display  : block;
+    left     : 0;
+    width    : 100%;
+}
+
+header, footer {
+    background : rgba( 0, 0, 0, 0.222 );
+    font-size   : 22px;
+    line-height : 42px;
+}
+
+header {
+    top : 0;
+    height : 64px;
+}
+
+footer {
+    bottom : 0;
+    height : 64px;
+}
+
+main {
+    top : 64px;
+    height : calc( 100vh - 128px );
+    overflow-x : scroll;
+    overflow-y : scroll;
+}

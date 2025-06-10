@@ -1,0 +1,124 @@
+
+/* 
+
+    rimrod.css
+    2025-JUN-05
+
+    Provides theme for `RimRod` documentation.
+
+    NOTE: Included by `docs.css`
+
+*/
+
+@import url( "./layout.css" );
+
+
+html {
+    color : rgba( 42, 42, 82, 0.987 );
+    background : rgba( 142, 142, 182, 0.222 );
+}
+
+pre {
+    overflow-x : scroll;
+    text-align : left;
+}
+
+pre, code, var {
+    color : rgba( 82, 82, 22, 0.987 );
+}
+
+html, body {
+    font : 16pt sans-serif;
+}
+
+body {
+    margin-bottom : 42vh;
+}
+
+textarea, pre {
+    padding : 1.5ch;
+}
+
+blockquote, aside {
+    display : block;
+    padding : 10px;
+}
+
+script, 
+textarea, pre, 
+code, var {
+    font : 16pt monospace;
+}
+
+script, 
+blockquote, aside, 
+textarea, pre {
+    padding-left  : 1em;
+    padding-right : 1em;
+}
+
+a, 
+th, td {
+    padding : 3px;
+    padding-left  : 1ch;
+    padding-right : 1ch;
+}
+
+table {
+    width : 80%;
+    margin-left : 8%;
+}
+
+a,
+blockquote, aside, 
+pre {
+    border-radius : 1ch;
+    background : rgba( 0, 0, 0, 0.142 );
+}
+
+th {
+    background : rgba( 0, 0, 142, 0.242 );
+}
+
+td {
+    background : rgba( 0, 0, 0, 0.142 );
+}
+
+header {
+    text-align : center;
+}
+
+a {
+    text-decoration : none;
+    color : inherit;
+}
+
+a:visited {
+    color : inherit;
+}
+
+a, button {
+    cursor : pointer;
+}
+
+a:hover {
+    box-shadow : 0px 0px 11px black;
+    background : rgba( 0, 0, 0, 0.342 );    
+}
+
+p {
+    padding : 2px;
+    padding-left  : 21px;
+    padding-right : 21px;
+}
+
+input[type='color'] {
+    display : inline block;
+    width  : 64px;
+    height : 64px;
+    border-radius : 11px;
+    padding : 0;
+    border : 0;
+    cursor : pointer;
+}
+

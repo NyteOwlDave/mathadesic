@@ -4,10 +4,76 @@
   <meta charset="utf-8">
   <title>math.js | basic usage</title>
   <script src="https://unpkg.com/mathjs@14.5.2/lib/browser/math.js"></script>
+  <style>
+    @import url("./style/rimrod.css");
+    main {
+        text-align : center;
+    }
+    textarea {
+        opacity : 0.42;
+        margin : 20px;
+        resize : vertical;
+        width : calc( 100vw - 200px );
+        height : calc( 400px );
+        white-space : nowrap;
+        overflow-x : scroll;
+        overflow-y : scroll;
+        border : 0;
+        padding : 1.25ch;
+        font : 14pt monospace;
+        color : rgb( 2, 2, 22 );
+        background : rgb( 242, 242, 182 );
+    }
+    textarea:active ,
+    textarea:focus ,
+    textarea:hover {
+        opacity : 1;
+        box-shadow : -10px -10px 22px azure,
+                      10px  10px 42px black;
+    }
+    menu#hamburger {
+        z-index : 5551212;
+        position : fixed;
+        display  : block;
+        top : 10px;
+        right : 10px;
+        width : 100px;
+        border : 2px solid midnightblue;
+        color : white;
+        background : black; 
+    }
+  </style>
 </head>
 <body>
 
-<textarea id="sop" wrap="off"></textarea>
+<header>
+    <nav>
+        <a href="./" title="⋄ Workspace Folder ⋄">⋄ Workspace ⋄</a>
+        <a href="http://dave-legacy/std/app/mathadesic/mathjs-demo.html" 
+           title="⋄ Legacy Workstation ⋄">⋄ Legacy ⋄</a>
+        <a href="http://dave-tower/std/app/math/mathadesic/mathjs-demo.html" 
+           title="⋄ Tower Workstation ⋄">⋄ Tower ⋄</a>
+        <a href="http://dave-ryzen/applets/app/mathadesic/mathjs-demo.html" 
+           title="⋄ Ryzen Workstation ⋄">⋄ Ryzen ⋄</a>
+        <a href="http://dave-legacy/42/app/stereogram/app/chachi.html"
+           title="⋄  Chachi on Legacy ⋄">⋄ Chachi ⋄</a>
+        <a href="https://mathjs.org/docs/" 
+           title="⋄ math.js Manual ⋄">⋄ math.js ⋄</a>
+    </nav>
+</header>
+
+<main>
+<div>
+    <textarea id="sop" wrap="off"></textarea>
+</div>
+<div>
+    <textarea id="sip" wrap="off"></textarea>
+</div>
+</main>
+
+<menu id="hamburger">(pending)</menu>
+
+<footer>(pending)</footer>
 
 <script>
 function print(value) {
