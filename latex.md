@@ -12,30 +12,33 @@ code {
 </style>
 
 $$
-8^{\sqrt{2}} = 16^{\sqrt{2x}}
 $$
 
-`Find Common Base:`
+`Solution #1`
 
 $$
-2^{3\sqrt{2}} = 2^{4\sqrt{2x}}
+\displaylines {
+5=9^{(1-x)/2x}  \cr
+5=3^{(1-x)/x}   \cr
+5^x=3^{(1-x)}   \cr
+15^x=5^x×3^x    \cr
+=3^{(1-x)}×3^x  \cr
+=3^{(1-x+x)}    \cr
+=3^1            \cr
+=3
+}
 $$
 
-`Set Exponents Equal:`
+`Solution #2`
 
 $$
-3\sqrt{2} = 4\sqrt{2x}
-$$
-
-`Square Both Sides:`
-
-$$
-18 = 32x
-$$
-
-`Isolate X and Reduce Fraction:`
-
-$$
-x = \frac{18}{32} = \frac{9}{16}, ans.
+\displaylines {
+(3^2)^{(1-x)/2x} = 5    \cr
+3^{(1-x)/x} = 5         \cr
+3^{(1/x)-1} = 5         \cr
+\frac{3^{1/x}}{3} = 5   \cr
+3^{1/x} = 15            \cr
+15^x = 3
+}
 $$
 
