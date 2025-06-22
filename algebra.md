@@ -27,3 +27,11 @@ $$
 & a^4-b^4=(a+b)(a-b)\left(a^2+b^2\right)
 \end{aligned}
 $$
+
+<footer>
+<nav>
+<a href="./">Workspace</a>
+<a href="http://dave-tower/std/app/applet/alg-checks.html">Tests</a>
+</nav>
+</footer>
+
