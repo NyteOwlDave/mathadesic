@@ -82,7 +82,7 @@ Commodore 64 BASIC
 <footer>
 <nav>
 <a href="./">Workspace</a>
-<a href="http://dave-tower/mathadesic/c63-basic.html">Refresh</a>
+<a href="http://dave-tower/mathadesic/c64-basic.html">Refresh</a>
 </nav>
 </footer>
 
