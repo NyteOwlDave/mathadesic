@@ -144,7 +144,7 @@ const keywordDoc = `
 <script>
 function keywordList() {
     const RS = "\n";
-    return keywordsDoc.split( RS )
+    return keywordDoc.split( RS )
         .map( s => s.trim() )
         .filter( s => ( !! s ) );
 }
@@ -160,7 +160,7 @@ function inspectKeywords() {
 
 <script>
 const C64 = {
-    cdoc : keywordsDoc ,
+    cdoc : keywordDoc ,
     list : keywordList ,
     inspect : inspectKeywords
 };
