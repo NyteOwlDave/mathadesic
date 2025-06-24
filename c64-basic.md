@@ -1,6 +1,30 @@
 
-# Commodore 64 BASIC
+<head>
+<style>
+@import url("./style/c64.css");
+a {
+    display : inline-block;
+    margin-top : 5px !important;
+}
+header {
+    margin : 0;
+    padding : 0;
+    width : 100%;
+    height : 42px;
+    line-height : 44px;
+    font-size : 28px;
+}
+</style>
+<script>
+document.title = "Commodore 64 BASIC";
+</script>
+</head>
 
+<header>
+Commodore 64 BASIC
+</header>
+
+<main>
 <nav>
 ⋄ <a href="https://www.c64-wiki.com/wiki/Main_Page">Home Page</a>
 ⋄ <a href="https://www.c64-wiki.com/wiki/ABS">ABS</a>
@@ -53,6 +77,15 @@
 ⋄ <a href="https://www.c64-wiki.com/wiki/TO">TO</a>
 ⋄ 
 </nav>
+</main>
+
+<footer>
+<nav>
+<a href="./">Workspace</a>
+<a href="http://dave-tower/mathadesic/c63-basic.html">Refresh</a>
+</nav>
+</footer>
+
 
 <script>
 const keywordDoc = `
