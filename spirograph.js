@@ -17,7 +17,7 @@ function createCanvas( w, h ) {
 }
 
 function rgb( r, g, b ) {
-    const fix = n => parseInt( n ) % 256;
+    const fix = n => parseInt( n ) & 255;
     r = fix( r );
     g = fix( g );
     b = fix( b );
