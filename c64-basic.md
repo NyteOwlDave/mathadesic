@@ -75,13 +75,14 @@ Commodore 64 BASIC
 ⋄ <a href="https://www.c64-wiki.com/wiki/STEP">STEP</a>
 ⋄ <a href="https://www.c64-wiki.com/wiki/THEN">THEN</a>
 ⋄ <a href="https://www.c64-wiki.com/wiki/TO">TO</a>
-<br>
+⋄ <hr>
 ⋄ <a href="http://dave-ryzen/">Ryzen</a>
 ⋄ <a href="http://dave-tower/">Tower</a>
 ⋄ <a href="http://dave-legacy/">Legacy</a>
 ⋄ <a href="http://dave-zombie">Zombie</a>
 ⋄ <a href="http://dave-probook/">Probook</a>
 ⋄ <a href="http://dave-lenovo/">Lenovo</a>
+⋄ <hr>
 </nav>
 </main>
 
