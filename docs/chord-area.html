@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>chord-area</title>
+<style type="text/css">
+</style>
+
+<script>
+MathJax = {
+  options: {
+    renderActions: {
+      find: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+  }
+};
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script></head>
+<body>
+<style>
+body {
+    font-size : 24pt;
+    text-align : center;
+}
+code {
+    filter : drop-shadow( 0px 0px 11px black );
+    display : block;
+    font-size : 14pt;
+    color : darkblue;
+}
+</style>
+
+<h1>Chord Area</h1>
+<pre><code>A = r² * (cos⁻¹((r-h)/r) - ((r-h)/r) * √(2rh - h²))
+
+A = Area
+r = radius
+h = height of sagitta
+</code></pre>
+<p>The <code>sagitta</code> is the line representing the shortest
+distance form the circle's origin to the line that
+intersects with the circle. This line will aways
+always be perpendicular to the line of intersection.</p>
+<p>
+<script type="math/tex; mode=display">
+</script>
+</p>
+
+</body>
+</html>
