@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabriel's Horn - Wireframe</title>
+<!--
+    https://claude.ai/chat/ff940426-fedd-49f3-b560-c9d8e4a830d4
+    https://claude.ai/public/artifacts/c9b4b775-1738-46ea-ab68-e573c1149604 
+-->
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 1000px;
+            width: 100%;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #888;
+            margin-bottom: 30px;
+        }
+        
+        canvas {
+            border: 2px solid #4ecdc4;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            background: #000;
+            margin-bottom: 20px;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        label {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        input[type="range"] {
+            width: 120px;
+            accent-color: #4ecdc4;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        
+        button:hover {
+            transform: scale(1.05);
+        }
+        
+        .info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            margin-top: 20px;
+            text-align: left;
+        }
+        
+        .formula {
+            font-family: 'Courier New', monospace;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gabriel's Horn</h1>
+        <div class="subtitle">The Painter's Paradox - Infinite Surface Area, Finite Volume</div>
+        
+        <canvas id="hornCanvas" width="800" height="600"></canvas>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label for="rotationX">Rotation X</label>
+                <input type="range" id="rotationX" min="0" max="360" value="20">
+            </div>
+            <div class="control-group">
+                <label for="rotationY">Rotation Y</label>
+                <input type="range" id="rotationY" min="0" max="360" value="30">
+            </div>
+            <div class="control-group">
+                <label for="segments">Segments</label>
+                <input type="range" id="segments" min="20" max="100" value="50">
+            </div>
+            <div class="control-group">
+                <label for="rings">Rings</label>
+                <input type="range" id="rings" min="10" max="50" value="25">
+            </div>
+            <button id="animate">Toggle Animation</button>
+        </div>
+        
+        <div class="info">
+            <h3>About Gabriel's Horn</h3>
+            <p>Gabriel's Horn is a fascinating mathematical object created by rotating the curve y = 1/x around the x-axis for x ≥ 1. This creates a horn-shaped surface with a remarkable property:</p>
+            
+            <div class="formula">
+                Volume = π ∫₁^∞ (1/x)² dx = π [finite]
+            </div>
+            <div class="formula">
+                Surface Area = 2π ∫₁^∞ (1/x)√(1 + 1/x⁴) dx = ∞ [infinite]
+            </div>
+            
+            <p>This paradox suggests you could fill the horn with paint (finite volume) but could never paint its surface (infinite area) - hence "The Painter's Paradox".</p>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('hornCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        let rotationX = 20;
+        let rotationY = 30;
+        let segments = 50;
+        let rings = 25;
+        let animating = false;
+        let animationId;
+        
+        // Get control elements
+        const rotationXSlider = document.getElementById('rotationX');
+        const rotationYSlider = document.getElementById('rotationY');
+        const segmentsSlider = document.getElementById('segments');
+        const ringsSlider = document.getElementById('rings');
+        const animateButton = document.getElementById('animate');
+        
+        // 3D to 2D projection
+        function project(x, y, z) {
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const scale = 100;
+            
+            // Apply rotations
+            const cosX = Math.cos(rotationX * Math.PI / 180);
+            const sinX = Math.sin(rotationX * Math.PI / 180);
+            const cosY = Math.cos(rotationY * Math.PI / 180);
+            const sinY = Math.sin(rotationY * Math.PI / 180);
+            
+            // Rotate around X axis
+            const y1 = y * cosX - z * sinX;
+            const z1 = y * sinX + z * cosX;
+            
+            // Rotate around Y axis
+            const x2 = x * cosY + z1 * sinY;
+            const z2 = -x * sinY + z1 * cosY;
+            
+            // Project to 2D
+            const screenX = centerX + x2 * scale;
+            const screenY = centerY - y1 * scale;
+            
+            return { x: screenX, y: screenY, z: z2 };
+        }
+        
+        // Generate Gabriel's Horn points
+        function generateHornPoints() {
+            const points = [];
+            const startX = 1;
+            const endX = 6; // Truncate at x=6 for visualization
+            
+            for (let i = 0; i <= rings; i++) {
+                const ring = [];
+                const x = startX + (endX - startX) * (i / rings);
+                const radius = 1 / x; // y = 1/x
+                
+                for (let j = 0; j <= segments; j++) {
+                    const angle = (j / segments) * 2 * Math.PI;
+                    const y = radius * Math.cos(angle);
+                    const z = radius * Math.sin(angle);
+                    
+                    ring.push({ x: x, y: y, z: z });
+                }
+                points.push(ring);
+            }
+            return points;
+        }
+        
+        // Draw the wireframe
+        function drawHorn() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const points = generateHornPoints();
+            const projectedPoints = points.map(ring => 
+                ring.map(point => project(point.x, point.y, point.z))
+            );
+            
+            ctx.strokeStyle = '#4ecdc4';
+            ctx.lineWidth = 1;
+            ctx.globalAlpha = 0.8;
+            
+            // Draw longitudinal lines (along the horn)
+            for (let j = 0; j < segments; j++) {
+                ctx.beginPath();
+                for (let i = 0; i < projectedPoints.length; i++) {
+                    const point = projectedPoints[i][j];
+                    if (i === 0) {
+                        ctx.moveTo(point.x, point.y);
+                    } else {
+                        ctx.lineTo(point.x, point.y);
+                    }
+                }
+                ctx.stroke();
+            }
+            
+            // Draw circular cross-sections
+            for (let i = 0; i < projectedPoints.length; i++) {
+                // Sort points by z-depth for proper rendering
+                const ring = projectedPoints[i];
+                
+                ctx.beginPath();
+                for (let j = 0; j <= segments; j++) {
+                    const point = ring[j % segments];
+                    if (j === 0) {
+                        ctx.moveTo(point.x, point.y);
+                    } else {
+                        ctx.lineTo(point.x, point.y);
+                    }
+                }
+                ctx.stroke();
+            }
+            
+            // Add some gradient lines for depth
+            ctx.strokeStyle = '#ff6b6b';
+            ctx.globalAlpha = 0.3;
+            ctx.lineWidth = 2;
+            
+            // Draw a few highlighted meridians
+            for (let j = 0; j < segments; j += Math.floor(segments / 8)) {
+                ctx.beginPath();
+                for (let i = 0; i < projectedPoints.length; i++) {
+                    const point = projectedPoints[i][j];
+                    if (i === 0) {
+                        ctx.moveTo(point.x, point.y);
+                    } else {
+                        ctx.lineTo(point.x, point.y);
+                    }
+                }
+                ctx.stroke();
+            }
+        }
+        
+        // Animation loop
+        function animate() {
+            if (animating) {
+                rotationY = (rotationY + 1) % 360;
+                rotationYSlider.value = rotationY;
+                drawHorn();
+                animationId = requestAnimationFrame(animate);
+            }
+        }
+        
+        // Event listeners
+        rotationXSlider.addEventListener('input', (e) => {
+            rotationX = parseInt(e.target.value);
+            drawHorn();
+        });
+        
+        rotationYSlider.addEventListener('input', (e) => {
+            rotationY = parseInt(e.target.value);
+            drawHorn();
+        });
+        
+        segmentsSlider.addEventListener('input', (e) => {
+            segments = parseInt(e.target.value);
+            drawHorn();
+        });
+        
+        ringsSlider.addEventListener('input', (e) => {
+            rings = parseInt(e.target.value);
+            drawHorn();
+        });
+        
+        animateButton.addEventListener('click', () => {
+            animating = !animating;
+            animateButton.textContent = animating ? 'Stop Animation' : 'Toggle Animation';
+            if (animating) {
+                animate();
+            } else {
+                cancelAnimationFrame(animationId);
+            }
+        });
+        
+        // Initial draw
+        drawHorn();
+    </script>
+</body>
+</html>
