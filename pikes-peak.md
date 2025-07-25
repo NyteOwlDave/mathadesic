@@ -65,141 +65,149 @@ NEXT X
 
 > HTML
 
-```html
-<canvas></canvas>
-```
+<pre id="html-source-code-1">
+&lt;!--[ PENDING ]--&gt;
+</pre>
 
 > JavaScript
 
-```javascript
-
-const square = n => n * n;
-const sqrt = n => Math.sqrt( n );
-const cos  = n => Math.cos( t );
-
-const cgaColors = [
-"#000000" ,
-"#000080" ,
-"#008000" ,
-"#008080" ,
-"#800000" ,
-"#800080" ,
-"#808000" ,
-"#808080" ,
-"#C0C0C0" ,
-"#0000FF" ,
-"#00FF00" ,
-"#00FFFF" ,
-"#FF0000" ,
-"#FF00FF" ,
-"#FFFF00" ,
-"#FFFFFF"
-];
-
-const canvas  = document.querySelector( 'canvas' );
-const context = canvas.getContext( "2d" );
-
-function t_color( arg ) {
-    const i = parseInt( arg );
-    if ( isFinite( i ) ) {
-        const s = cgaColors[ i ];
-        if ( s ) return s;
-        return "red";
-    }
-    return
-}
-
-function setLineWidth( n ) {
-    context.lineWidth = parseFloat( n ) || 0;
-}
-
-function setLineStyle( style ) {
-    context.strokeStyle = cgaColor( style );
-}
-
-function setFillStyle( style ) {
-    context.fillStyle = cgaColor( style );
-}
-
-function setLineWidth( n ) {
-    context.lineWidth = n; 
-}
-
-function line( x1, y1, x2, x2, style ) {
-    setLineStyle( style );
-    const ctx = context;
-    ctx.beginPath();
-    ctx.moveTo( x1, y1 );
-    ctx.lineTo( x2, y2 );
-    ctx.stroke();
-}
-
-function cls( style ) {
-    const w = canvas.width  = 640;
-    const h = canvas.height = 480;
-    setFillStyle( style );
-    context.fillRect( 0, 0, w, h t_color( style ) );
-}
-
-function render() {
-    let X2 = 8; // REM starting point
-    let Y2 = 8;
-    let XOLD = 0;
-    let YOLD = 0;
-    cls( "black" );
-    for( let X=0; X <= 20; X += 1 ) {
-        for ( let Y=0; Y <= 20; Y += 1 ) {
-            let D = sqrt( square(X-X2) + square(Y-Y2) );
-            let XNEW = 300 + 14*Y - X*10;
-            let YNEW = 150 + X*4 + Y*5 - 150 * cos( D/3 ) / (D+1);
-            if ( Y ) {
-                let YD = (YNEW - YOLD) / (XNEW - XOLD); // REM delta y
-                let Y4 = YOLD;
-                for ( let N = XOLD; N <= XNEW; N += 1 ) {
-                    line( N, 380,  N, Y4, 0 );  // blank line
-                    Y4 = Y4 + YD;
-                }
-                line( XOLD, YOLD, XNEW YNEW, 9 );
-            }
-            XOLD = XNEW;
-            YOLD = YNEW;
-        }
-    }
-}
-
-```
+<pre id="js-source-code-1">
+/*--[ PENDING ]--*/
+</pre>
 
 ---
 
 # Try It
 
-<canvas></canvas>
 
+<canvas details="Drawing Surface"></canvas>
+
+
+<menu details="Dot Menu">
 <button onclick="dot(this)">Draw</button>
 <button onclick="dot(this)">Clear</button>
+</menu>
 
-<footer>
+
+<footer details="Navigation">
 <nav>
 <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D">Canvas</a>
 </nav>
 </footer>
 
 
-<script>
-</script>
+<script name="application" details="Initialization">
 
-
-<script>
-function dunzel() {
-    alert( "Incomplete" );
+function fullscreen( id_or_gadget ) {
+    let target = id_or_gadget;
+    if ( target instanceof HTMLElement ) {
+        target.requestFullscreen( target );
+        return;
+    }
+    if ( "string" === typeof target ) {
+        target = document.getElementById( target );
+        return fullscreen( target );
+    }
+    throw new Error( "Gadget not located: " + target );
 }
-const Actions = {
-    clear : cls ,
-    draw  : dunzel
-};
+
+function initPreviewGadgets() {
+    const previews = document.querySelectorAll( 'pre' );
+    const list = Array.from( previews );
+    list.forEach( init );
+    function init( pe ) {
+        pe.style.cursor = "pointer";
+        pe.addEventListener( 'click', editFullScreen );
+    }
+}
+
+function editFullScreen( event ) {
+    const ID = "sip";
+    const auntie = document.documentElement;
+    const gadget = event.target;
+    const content = gadget.innerText;
+    let sip = document.getElementById( ID );
+    if (! sip ) {
+        sip = document.createElement( 'textarea' );
+        sip.id = ID;
+        document.documentElement.appendChild( sip );
+    }
+    sip.value = content;
+    sip.focus();
+    fullscreen( sip );
+}
+
+function initCanvasGadget() {
+    const canvas = document.querySelector( 'canvas' );
+    canvas.style.cursor = "pointer";
+    canvas.addEventListener( 'click', zoom );
+    function zoom() { fullscreen( canvas ); }
+}
+
+function main() {
+    try { 
+        initPreviewHTML();
+        initPreviewJS();
+        initPreviewGadgets();
+        initCanvasGadget();
+    } catch ( e ) { 
+        alert( e );
+    }
+}
+
+addEventListener( 'load', main );
+
 </script>
 
-<script>
+
+<script name="application" details="Initialize Source Code Preview" snoopy="DOM Snippet">
+
+console.log( "TODO: Snoopy Attribute Database for Snippets" );
+console.log( "SEE: Snoopy Workspace on Omega" );
+
+function composePreviewID( { language, index } ) {
+    return `${language}-source-code-${index}`;
+}
+
+function initPreview( content, { language="text", index=1 } ) {
+    const id = composePreviewID( { language, index } );
+    const gadget = document.getElementById( id );
+    if (! gadget ) {
+        alert( "Unable to locate ID# " + id );
+        return;
+    }
+    gadget.innerText = content;
+}
+
+function initPreviewHTML( index=1 ) {
+    const canvas = document.querySelector( 'canvas' );
+    const content = canvas.outerHTML;
+    initPreview( content, {
+        language : "html" ,
+        index
+    } );
+}
+
+function initPreviewJS( index=1 ) {
+    const q=`script[name="preview"]`;
+    const scripts = document.querySelectorAll( q );
+    const docs = [];
+    const list = Array.from( scripts );
+    list.forEach( o => { 
+        docs.push( o.innerText.trim() + "\n\n" );
+    } );
+    const content = docs.join( "" );
+    initPreview( content, {
+        language : "js" ,
+        index
+    } );
+}
+
+</script>
+
+
+<script name="application" details="Dot Button Handler">
+
 function dot( button ) {
     const verb = button.innerText.trim().toLowerCase();
     try {
@@ -212,15 +220,17 @@ function dot( button ) {
 
 </script>
 
-<script>
+
+<script name="preview" details="math.js except">
 
 const square = n => n * n;
 const sqrt = n => Math.sqrt( n );
-const cos  = n => Math.cos( t );
+const cos  = n => Math.cos( n );
 
 </script>
 
-<script>
+
+<script name="preview" details="CGA Palette for HTML/CSS" snoopy="Graphics">
 
 const cgaColors = [
 "#000000" ,
@@ -240,9 +250,8 @@ const cgaColors = [
 "#FFFF00" ,
 "#FFFFFF"
 ];
-    </script><script>
 
-function t_color( arg ) {
+function t_color16( arg ) {
     const i = parseInt( arg );
     if ( isFinite( i ) ) {
         const s = cgaColors[ i ];
@@ -252,38 +261,30 @@ function t_color( arg ) {
     return
 }
 
-    </script><script>
+</script>
+
+<script name="preview" details="Canvas Support System">
 
 const canvas  = document.querySelector( 'canvas' );
 const context = canvas.getContext( "2d" );
-
-    </script><script>
 
 function setLineWidth( n ) {
     context.lineWidth = parseFloat( n ) || 0;
 }
 
-    </script><script>
-
 function setLineStyle( style ) {
-    context.strokeStyle = cgaColor( style );
+    context.strokeStyle = t_color16( style );
 }
-
-    </script><script>
 
 function setFillStyle( style ) {
-    context.fillStyle = cgaColor( style );
+    context.fillStyle = t_color16( style );
 }
-
-    </script><script>
 
 function setLineWidth( n ) {
     context.lineWidth = n; 
 }
 
-    </script><script>
-
-function line( x1, y1, x2, x2, style ) {
+function line( { x1, y1 }, { x2, y2 }, style ) {
     setLineStyle( style );
     const ctx = context;
     ctx.beginPath();
@@ -292,41 +293,60 @@ function line( x1, y1, x2, x2, style ) {
     ctx.stroke();
 }
 
-    </script><script>
-
 function cls( style ) {
     const w = canvas.width  = 640;
     const h = canvas.height = 480;
     setFillStyle( style );
-    context.fillRect( 0, 0, w, h t_color( style ) );
+    context.fillRect( 0, 0, w, h, t_color16( style ) );
 }
 
-    </script><script>
+</script>
+
+
+<script name="preview" details="Render Demo">
 
 function render() {
-    let X2 = 8; // REM starting point
-    let Y2 = 8;
-    let XOLD = 0;
-    let YOLD = 0;
-    cls( "black" );
-    for( let X=0; X <= 20; X += 1 ) {
-        for ( let Y=0; Y <= 20; Y += 1 ) {
-            let D = sqrt( square(X-X2) + square(Y-Y2) );
-            let XNEW = 300 + 14*Y - X*10;
-            let YNEW = 150 + X*4 + Y*5 - 150 * cos( D/3 ) / (D+1);
-            if ( Y ) {
-                let YD = (YNEW - YOLD) / (XNEW - XOLD); // REM delta y
-                let Y4 = YOLD;
-                for ( let N = XOLD; N <= XNEW; N += 1 ) {
-                    line( N, 380,  N, Y4, 0 );  // blank line
-                    Y4 = Y4 + YD;
+    let x1, x2 = 8; // REM starting point
+    let y1, y2 = 8;
+    let xOld = 0;
+    let yOld = 0;
+    cls( 0 );
+    for( let x=0; x <= 20; x += 1 ) {
+        for ( let y=0; y <= 20; y += 1 ) {
+            let d = sqrt( square(x-x2) + square(y-y2) );
+            let xNew = 300 + 14*y - x*10;
+            let yNew = 150 + x*4 + y*5 - 150 * cos( d/3 ) / (d+1);
+            if ( y ) {
+                // Delta-Y
+                let yd = (yNew - yOld) / (xNew - xOld); 
+                let y4 = yOld;
+                for ( let n = xOld; n <= xNew; n += 1 ) {
+                    line( n, 380,  n, y4, 0 );  // blank line
+                    y4 = y4 + yd;
                 }
-                line( XOLD, YOLD, XNEW YNEW, 9 );
+                _line( xOld, yOld, xNew, yNew, 9 );
             }
-            XOLD = XNEW;
-            YOLD = YNEW;
+            xOld = xNew;
+            yOld = yNew;
         }
+    }
+    function _line( x1, y1, x2, y2, style ) {
+        line( { x1, y1 }, { x2, y2 }, style );
     }
 }
 
 </script>
+
+
+<!--[ DEFINE AFTER DEMO ]-->
+<script name="application" details="Dot Action Map">
+function dunzel() {
+    alert( "Incomplete" );
+}
+const Actions = {
+    clear : cls ,
+    draw  : render
+};
+</script>
+
+
