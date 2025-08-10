@@ -1,0 +1,42 @@
+#!/bin/bash
+
+SRC="./menu.md";
+
+update() {
+    cp "$SRC" "$1";
+}
+
+batch() {
+    local a;
+    while read a; do
+        echo $a;
+    done;
+}
+
+list() {
+    /home/dave/Scripts/folders > folder.list;
+}
+
+enact() {
+    local a;
+    while read a; do
+        update $a;
+    done;
+}
+
+proceed() {
+    list;
+    cat folder.list | grep -v '^\.' | enact;
+}
+
+inspect() {
+    list;
+    echo
+    cat folder.list | grep -v '^\.' | batch;
+    echo
+    echo "Use the --enact flag to copy files";
+    echo
+}
+
+[[ "$@" == "--enact" ]] && proceed || inspect;
+

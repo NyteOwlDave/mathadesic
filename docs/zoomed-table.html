@@ -1,0 +1,279 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>zoomed-table</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<header>
+<h1>
+Dave
+</h1>
+</header>
+
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int</td>
+<td>float</td>
+<td>ceil</td>
+</tr>
+<tr>
+<td>floor</td>
+<td>round</td>
+<td>trunc</td>
+</tr>
+<tr>
+<td>abs</td>
+<td>sgn</td>
+<td>sgnz</td>
+</tr>
+<tr>
+<td>rnd</td>
+<td>irnd</td>
+<td>pow</td>
+</tr>
+<tr>
+<td>pow2</td>
+<td>pow10</td>
+<td>sqrt</td>
+</tr>
+<tr>
+<td>cbrt</td>
+<td>exp</td>
+<td>log</td>
+</tr>
+<tr>
+<td>log2</td>
+<td>log10</td>
+<td>logn</td>
+</tr>
+<tr>
+<td>rootn</td>
+<td>square</td>
+<td>cube</td>
+</tr>
+<tr>
+<td>cruxx</td>
+<td>crux</td>
+<td>sin</td>
+</tr>
+<tr>
+<td>cos</td>
+<td>tan</td>
+<td>asin</td>
+</tr>
+<tr>
+<td>acos</td>
+<td>atan</td>
+<td>zeta</td>
+</tr>
+<tr>
+<td>zulu</td>
+<td>hypot</td>
+<td>atan2</td>
+</tr>
+<tr>
+<td>polar</td>
+<td>normal</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<style>
+html, body {
+    border : 0;
+    margin : 0;
+    padding : 0;
+    background : rgb( 252, 252, 222 );
+}
+body {
+    position : absolute;
+    overflow : scroll;
+    width    : 100%;
+    height   : 100%;
+    resize   : none;
+}
+table {
+    position : absolute;
+    margin-top : 90px;
+    width    : 100%;
+    height   : 100%;
+    resize   : none;
+}
+header {
+    z-index  : 1000;  
+    position : fixed;
+    width    : 100%;
+    resize   : none;  
+    text-align : center;
+    background : rgba( 122, 172, 242, 1 );
+}  
+td {  
+   padding : 1.447ch;
+}
+td:focus {
+    color      : #0404F4;
+    background : mintcream;
+}
+</style>
+
+<script>  
+D = document;
+</script>
+
+<script>  
+function main() {
+    try {
+        const table = D.querySelector( 'table' );
+        table.addEventListener( 'keydown', hoopla );
+        const cells = Array.from( D.querySelectorAll( 'td' ) );
+        cells.forEach( o => o.setAttribute( 'contenteditable', '' ) );
+    } catch ( e ) { 
+        alert( e );
+    }
+}
+addEventListener( 'load', main );
+</script>
+
+<script>
+function getTableSize( td ) {
+    const tr = td.parentElement;
+    const tb = tr.parentElement;
+    const rows = Array.from( tb.rows );
+    const rowCount = tb.rows.length;
+    let colCount = 0;
+    while ( rows.length ) {
+        const tr = rows.pop();
+        const n = tr.cells.length;
+        colCount = Math.max( n, colCount );
+    }
+    return { rowCount, colCount };
+}
+</script>
+
+<script>
+let EMPTY_CELL = "❔";
+function appendRow( tb, numCols ) {
+    const tr = tb.insertRow();
+    while ( tr.cells.length < numCols ) {
+        const td = tr.insertCell();
+        td.textContent = EMPTY_CELL;
+        td.setAttribute( 'contenteditable', '' );
+    }
+    return tr;
+}
+</script>
+
+<script>
+function showFlash( td ) {
+}
+</script>
+
+<script>
+function scrollToBottom() {
+    window.scrollTo( 0, screen.availHeight );
+}
+</script>
+
+<script>
+function harpo( event ) {
+    if ( event instanceof Event ) {
+        const code = event.keyCode;
+        if ( [ 16, 17, 18 ].includes( code ) ) return;
+        harpo.event = event;
+        return harpo( code );
+    } else {
+        harpo.event = null;
+    }
+    const code = event;
+    event = harpo.event;
+    if ( code === 145 ) {
+        mine(); // Handle harpo event, if any
+        harpo.keylock = (! harpo.keylock );
+        return;
+    }
+    if ( harpo.keylock ) {
+        mine(); // Handle harpo event, if any
+        D.activeElement.textContent = code;
+        return;
+    }
+    if ( event.altKey ) {
+        if ( code === 13 ) {
+            mine(); // Handle harpo event, if any
+            const o = event.target;
+            try { 
+                harpo.output = window.eval( o.innerText );
+            } catch ( e ) {
+                alert( harpo.error = e );
+                throw e;
+            }
+            return;
+        }
+        if ( code === alphaKeyCode( 'M' ) ) {
+            mine(); // Handle harpo event, if any
+            const o = event.target;
+            o.textContent = "Modules!";
+            return;
+        }
+    }
+    function mine() {
+        if ( event ) handled( event );
+    }
+}
+function alphaKeyCode( s ) {
+    return s.trim().toUpperCase().charCodeAt( 0 );
+}
+</script>
+
+<script>
+function hoopla( event ) {
+    const code = event.keyCode;
+    if ( [ 16, 17, 18 ].includes( code ) ) return;
+    if ( code !== 9 ) { 
+        return harpo( event );
+    };
+    const td = D.activeElement;
+    const tr = td.parentElement;
+    const col = td.cellIndex;
+    const row = tr.rowIndex;
+    const size = getTableSize( td );
+    const rowMax = size.rowCount - 1;
+    const colMax = size.colCount - 1;
+    if ( event.shiftKey ) {
+        if ( row > 1 ) return;
+        if ( col > 0 ) return;
+        handled( event );
+        showFlash( td );
+    } else {
+        if ( row < rowMax ) return;
+        if ( col < colMax ) return;
+        handled( event );
+        const newRow = appendRow( tr.parentElement, size.colCount );
+        newRow.cells[ 0 ].focus();
+        scrollToBottom();
+    }
+}
+function handled( event ) {
+    event.preventDefault();
+    event.stopPropagation();
+}
+</script>
+
+</body>
+</html>

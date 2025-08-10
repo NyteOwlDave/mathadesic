@@ -1,0 +1,159 @@
+
+/* 
+    [Markdown Notes](./waving-flag.css.md)
+    [Workspace](./)
+*/
+
+.center    { text-align : center; }
+.hidden    { display : none;      } 
+
+.zoom {
+    position : fixed;
+    margin   : 0;
+    width  : 100%;
+    height : 100%;
+    resize : none;
+    overflow : auto scroll;
+}
+
+.dock {
+    position : fixed;
+    margin   : 0;
+}
+
+.top {
+    top   : 0;
+    left  : 0;
+    width : 100%;
+}
+
+.bottom {
+    bottom  : 0;
+    left    : 0;
+    width : 100%;
+}
+
+.left {
+    top    : 0;
+    left   : 0;
+    height : 100%;
+}
+
+.right {
+    top    : 0;
+    right  : 0;
+    height : 100%;
+
+    width  : 50%;
+    height : 50%;
+}
+
+.quadrant-1 {  
+    top    : 0;
+    right  : 0;
+    width  : 50%;
+    height : 50%;
+}
+
+.quadrant-2 {
+    top    : 0;
+    left   : 0;
+    width  : 50%;
+    height : 50%;
+}
+
+.quadrant-3 {
+    bottom : 0;
+    left   : 0;
+    width  : 50%;
+    height : 50%;
+}
+
+.quadrant-4 {
+    bottom : 0;
+    left   : 0;
+    width  : 50%;
+    height : 50%;
+}
+
+html, body {
+    text-align : center;
+    margin : 0;
+    padding : 0;
+    border : 5px solid transparent;
+}
+
+.source-code {
+    color : mintcream;
+    font-family : "Noto Sans Mono", monospace;
+    font-size : 18pt;
+    max-height : 40%;
+    min-height : 40%;
+    text-align : left;
+    padding : 1.42ch;
+    resize : none;
+    overflow-x : auto scroll;
+    overflow-y : scroll;
+}
+
+textarea {
+    background : #040442;
+    margin  : 0;
+    padding : 0;
+    width : 80%;
+    margin-left : 0;
+}
+
+pre {
+    background : #044214;
+    width : 80%;
+    margin-left : 8%;
+}
+
+.workspace { --decal : "🗃️";  --title : "🗃️ Workspace";  }
+.files     { --decal : "🗂️";  --title : "🗂️ Files";      }
+.file      { --decal : "📄";   --title : "📄 File";        }
+.folder    { --decal : "📁";   --title : "📁 Folder";      }
+.chippy    { --decal : "🦜";   --title : "🦜 Chippy";      }
+.pinned    { --decal : "📌";   --title : "📌 Pinned Item"; }
+.error     { --decal : "🔴";   --title : "🔴 Error";       }
+.smiley    { --decal : "🙂";   --title : "🙂 Smiley Face"; }
+.pending   { --decal : "⏲️";  --title : "⏲️ Pending";    }
+.system42  { --decal : "😜";   --title : "😜 System 42";   }
+.sulu      { --decal : "🤺";   --title : "🤺 Sulu";        }
+.add       { --decal : "➕";   --title : "➕ Add";          }
+.remove    { --decal : "➖";   --title : "➖ Remove";       }
+.upload    { --decal : "📤";   --title : "📤 Upload";      }
+.download  { --decal : "📥";   --title : "📥 Download";    }
+.load      { --decal : "🔓";   --title : "⏲️ Load";       }
+.save      { --decal : "🔏";   --title : "⏲️ Save";       }
+.edit      { --decal : "🖋️";  --title : "⏲️ Edit";       }
+.zoom      { --decal : "💠";   --title : "⏲️ Zoom";       }
+.save      { --decal : "🔏";   --title : "🔏 Save";        }
+.edit      { --decal : "🖋️";   --title : "🖋️ Edit";        }
+.zoom      { --decal : "💠";   --title : "💠 Zoom";        }
+
+.upload:hover,
+.download:hover,
+.load:hover,
+.save:hover,
+.edit:hover,
+.zoom:hover,
+.pinned:hover ,
+.error:hover ,
+.smiley:hover ,
+.pending:hover ,
+.system42:hover ,
+.sulu:hover ,
+.add:hover ,
+.remove:hover ,
+.workspace:hover ,
+.files:hover ,
+.file:hover ,
+.folder:hover ,
+.chippy:hover {
+    color : gold;
+    text-shadow : 0px 0px 0.5ch midnightblue;
+    cursor : pointer;
+}
+
